@@ -27,3 +27,20 @@ export const escapeHTMLSpecialChars = R.compose(
 	R.replace(/</g, "&lt;"),
 	R.replace(/&/g, "&amp;")
 );
+
+/**
+ * Filters custom emojis from the output
+ *
+ * @param input The string that needs to be filtered
+ *
+ * @returns Filtered string
+ */
+export function customEmojiFilter(input: string){
+	const regex = /\&lt;[^;]*&gt;\s{1,2}/gi;
+	return input.split(regex).join('');
+}
+
+export function replaceAtWithHash(input: string){
+	const updatedInput = input.split(' ').map(el => el[0] !== '@' ? el : el.replace('@', '#')).join(' ');
+	return updatedInput
+}

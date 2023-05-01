@@ -1,5 +1,5 @@
 import simpleMarkdown, { SingleASTNode } from "simple-markdown";
-import { escapeHTMLSpecialChars } from "./helpers";
+import { escapeHTMLSpecialChars, customEmojiFilter, replaceAtWithHash, filterExtraSpaces } from "./helpers";
 import R from "ramda";
 
 /***********
@@ -119,5 +119,14 @@ export function md2html(text: string) {
 			return html + `${tags.start}${extractText(node)}${tags.end}`;
 		}, "");
 
-	return html;
+	// Making a couple of formatting adjustments 
+	function htmlCleanup(input: string){
+		// Removing custom emojis from the HTML
+		input = customEmojiFilter(input)
+		// Replacing @ character with # character to prevent unintentional references in Telegram
+		input = replaceAtWithHash(input)
+		return input
+	}
+	
+	return htmlCleanup(html);
 }

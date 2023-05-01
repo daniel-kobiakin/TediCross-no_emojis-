@@ -40,7 +40,13 @@ export function customEmojiFilter(input: string){
 	return input.split(regex).join('');
 }
 
+/**
+ * Replaces @ with # to prevent unneeded references in Telegram
+ *
+ * @param input The string that needs to be processed
+ *
+ * @returns Processed string
+ */
 export function replaceAtWithHash(input: string){
-	const updatedInput = input.split(' ').map(el => el[0] !== '@' ? el : el.replace('@', '#')).join(' ');
-	return updatedInput
+	return input.split(' ').map(el => el.replace('@', '#')).join(' ');
 }

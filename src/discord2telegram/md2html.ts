@@ -1,5 +1,5 @@
 import simpleMarkdown, { SingleASTNode } from "simple-markdown";
-import { escapeHTMLSpecialChars, customEmojiFilter, replaceAtWithHash, filterExtraSpaces } from "./helpers";
+import { escapeHTMLSpecialChars, customEmojiFilter, replaceAtWithHash } from "./helpers";
 import R from "ramda";
 
 /***********

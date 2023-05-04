@@ -36,7 +36,7 @@ export const escapeHTMLSpecialChars = R.compose(
  * @returns Filtered string
  */
 export function customEmojiFilter(input: string){
-	const regex = /\&lt;[^;]*&gt;\s{1,2}/gi;
+	const regex = /\&lt;[^;]*\&gt;/gi;
 	return input.split(regex).join('');
 }
 
@@ -48,5 +48,31 @@ export function customEmojiFilter(input: string){
  * @returns Processed string
  */
 export function replaceAtWithHash(input: string){
-	return input.split(' ').map(el => el.replace('@', '#')).join(' ');
+	const regex = /\@/g;
+	return input.replace(regex, '#');
 }
+
+/**
+ * Replaces excessive (two or more) whitespaces with a single one
+ *
+ * @param input The string that needs to be processed
+ *
+ * @returns Processed string
+ */
+export function replaceExcessiveSpaces(input: string){
+	const regex = /[^\S\n]{2,}/g;
+	return input.replace(regex, ' ');
+}
+
+/**
+ * Removes whitespaces if they're placed at the beginning of the newline
+ *
+ * @param input The string that needs to be processed
+ *
+ * @returns Processed string
+ */
+export function removeNewlineSpaces(input: string){
+	const regex = /^[^\S\n]*/gm;
+	return input.replace(regex, '');
+}
+
